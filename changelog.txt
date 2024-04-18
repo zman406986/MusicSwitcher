@@ -1,9 +1,25 @@
-v1.1: Added Github downloadd and version checker support.
-v1.0: Official release. Fixed crash due to arcade/simulation having no music.
-v0.9: 14/04/2024-Added (a lot of) combat music, trimmed existing music, rewrote code.
-v0.1b: 27/03/2024-You don't need to download unless you want to change player faction music into a non-vanilla faction using Nexerelin's music option: Fixed compatibility. Also added a readme file & Changed the menu icon.
-v0.1a: 21/03/2024-Fixed crash upon arriving at dead-drop target location due to having no music
-v0.1: 21/03/2024-New Mod Created
+Version 1.1: 
+19/04/2024-Added Github downloadd and version checker support.
+
+Version 1.0: 
+15/04/2024-Official release. Fixed crash due to arcade/simulation having no music.
+
+Version 0.9: 
+14/04/2024-Added (a lot of) combat music, trimmed existing music, rewrote code.
+
+Version 0.1b: 
+27/03/2024-Fixed compatibility with Nexerelin's player music changen. Added a readme file & Changed the menu icon.
+
+Version 0.1a: 
+21/03/2024-Fixed crash upon arriving at dead-drop target location due to having no music
+
+Version 0.1: 
+21/03/2024-New Mod Created
+
 Old mod changelog (before mod name change from HSR Music Pack):
-v0.1.1: 11/03/2024-Added Simulated Universe menu tracks for exploration, tweaked volumes
-v0.0.1: 09/03/2024-Mod Created
+
+Version 0.1.1: 
+11/03/2024-Added Simulated Universe menu tracks for exploration, tweaked volumes
+
+Version 0.0.1: 
+09/03/2024-Mod Created
