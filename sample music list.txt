@@ -1,0 +1,86 @@
+For the sample music and logo, ©All rights reserved by miHoYo. 
+Other properties and any right, title, and interest thereof and therein (intellectual property rights included) not derived from 
+Honkai: Star Rail belong to their respective owners. 
+Please do not use or redistribute any part of this mod commercially. 
+Find Hoyo's guide on the usage of their copyrighted materials at
+https://www.hoyolab.com/article/17883171
+
+
+File name				music name 
+
+CustomCombat1.ogg		Hunter's Intuition · Kafka Boss Theme
+CustomCombat2.ogg		Flashpoint · Herta Space Station Battle Theme
+DiktatCombat.ogg			Godfather · Svarog Boss Theme
+HegemonyCombat.ogg		Frozen March · Cocolia Boss Theme (Phase 1)+ A Trap With No Return · Cocolia Boss Theme (Phase 2 Instrumental)
+LeagueCombat.ogg		Aventurine Suite
+RemnantCombat.ogg		Nevermore · Sam Boss Theme
+PirateCombat.ogg			Aberrant Receptacle · Starcrusher Swarm King · Boss Theme
+PathCombat.ogg			Mokshasatya Xianzhou Luofu Battle Theme
+LudditeCombat.ogg		Phantylia the Undying · Boss Theme (Finalized/Album Version)
+TachyonCombat.ogg		fReeStyLE · Herta Space Station Battle Theme
+
+CustomCampaign1.ogg		Fate · Cocolia’s Flashback / Path Space
+CustomCampaign2.ogg		Herta Space Station · Battle Theme 2 (Prologue)
+CustomNonCore.ogg		Oneiros of Borehole Planet
+CustomHyperspace.ogg		Primordial Resplendence		
+CustomMenu.ogg			Star Rail
+CustomSurvey.ogg			Call of the Stars
+CustomAlphaSite.ogg		Nevermore · Sam Boss Theme
+CustomMysteryHostile.ogg		Nevermore · Sam Boss Theme
+CustomMystery.ogg		Chaîne Signifiante
+CustomEncounterNeutral.ogg		Take the Journey
+CustomDefaultMarketNeutral.ogg	Ghost From the Past
+CustomDefaultMarketHostile.ogg	Herta Space Station · Battle Theme 1 (Prologue) 
+CustomDefaultMarketFriendly.ogg	Faded Sun (Great Mine)
+CustomDefaultEncounterNeutral.ogg	Frosty Trail
+CustomDefaultEncounterHostile.ogg	Frosty Trail
+CustomDefaultEncounterFriendly.ogg	Take the Journey
+CustomPirateMarketNeutral.ogg	Blaze · Jarilo-VI · Underworld Battle Theme/Fight Club
+CustomPirateMarketHostile.ogg	Crises · Herta Space Station Battle Theme
+CustomPirateMarketFriendly.ogg	Battle! Ultimate Champion
+CustomPirateEncounterNeutral.ogg	Dire Straits · Herta Space Station Battle Theme 
+CustomPirateEncounterHostile.ogg	Dire Straits · Herta Space Station Battle Theme 
+CustomPirateEncounterFriendly.ogg	Dire Straits · Herta Space Station Battle Theme 
+CustomLudditeMarketNeutral.ogg	Exquisite Ingenuity (Artisanship Commission)	
+CustomLudditeMarketHostile.ogg	Ave Astra et Viator (Stargazer Navalia)
+CustomLudditeMarketFriendly.ogg	Anthropic Domain (Central Starskiff Haven)
+CustomLudditeEncounterNeutral.ogg	Blade Abracadabra (Xianzhou Luofu Battle Theme)
+CustomLudditeEncounterHostile.ogg	Blade Abracadabra (Xianzhou Luofu Battle Theme)
+CustomLudditeEncounterFriendly.ogg	Thundering Chariot (Xianzhou Luofu Battle Theme)
+CustomTritachMarketNeutral.ogg	Deep Within · Simulated Universe
+CustomTritachMarketHostile.ogg	Mystery · Herta Space Station
+CustomTritachMarketFriendly.ogg	Version 1.6 Trailer OST - Crown of the Mundane and Divine
+CustomTritachEncounterNeutral.ogg	Dawn of Disaster · Herta Space Station Battle Theme
+CustomTritachEncounterHostile.ogg	Dawn of Disaster · Herta Space Station Battle Theme
+CustomTritachEncounterFriendly.ogg	Dawn of Disaster · Herta Space Station Battle Theme
+CustomHegemonyMarketNeutral.ogg	Kindling · Jarilo-VI · Underworld Battle Theme
+CustomHegemonyMarketHostile.ogg	Underground · Jarilo-VI · Underworld Battle Theme
+CustomHegemonyMarketFriendly.ogg		Everwinter
+CustomHegemonyEncounterNeutral.ogg	Everwinter
+CustomHegemonyEncounterHostile.ogg	Everwinter
+CustomHegemonyEncounterFriendly.ogg	Order Jarilo-VI Overworld Battle Theme
+CustomPathMarketNeutral.ogg	Evanescent Dreams
+CustomPathMarketHostile.ogg	Sanctus Medicus Dharani (Xianzhou Luofu Battle Theme)
+CustomPathMarketFriendly.ogg	Arteria Inceptionis (Roots of the Arbor)
+CustomPathEncounterNeutral.ogg	Thundering Chariot (Xianzhou Luofu Battle Theme)
+CustomPathEncounterHostile.ogg	Thundering Chariot (Xianzhou Luofu Battle Theme)
+CustomPathEncounterFriendly.ogg	Thundering Chariot (Xianzhou Luofu Battle Theme)
+CustomLeagueMarketNeutral.ogg	Dense Floe (Corridor of Fading Echoes)
+CustomLeagueMarketHostile.ogg	Braving the Cold Jarilo-VI Overworld Battle Theme
+CustomLeagueMarketFriendly.ogg	Cosmic Sacrifice for Love · Swarm Battle Theme
+CustomLeagueEncounterNeutral.ogg	Forgotten Hall
+CustomLeagueEncounterHostile.ogg	Forgotten Hall
+CustomLeagueEncounterFriendly.ogg	Forgotten Hall
+CustomRemnantEncounterNeutral.ogg	The Big Sleep
+CustomRemnantEncounterHostile.ogg	Dense Floe (Corridor of Fading Echoes)
+CustomRemnantEncounterFriendly.ogg	In Disbelief (Seclusion Zone)
+CustomPlayerMarketFriendly1.ogg	Flow Experience · Herta's Office
+CustomPlayerMarketFriendly2.ogg	Space Walk · Herta Space Station
+
+//music below duplicates vanilla
+CustomDiktatMarketNeutral.ogg	
+CustomDiktatMarketHostile.ogg	
+CustomDiktatMarketFriendly.ogg	
+CustomDiktatEncounterNeutral.ogg	
+CustomDiktatEncounterHostile.ogg	
+CustomDiktatEncounterFriendly.ogg	
