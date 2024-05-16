@@ -1,5 +1,7 @@
+Version 1.2:
+17/05/2024-Slightly tweaked sample music - added the new HSR boss theme as the hostile mysterious encounter music.
 Version 1.1:
-19/04/2024-Added Github downloadd and version checker support.
+19/04/2024-Added Github download and version checker support. Fixed some options not working.
 Version 1.0:
 15/04/2024-Official release. Fixed crash due to arcade/simulation having no music.
 Version 0.9:
