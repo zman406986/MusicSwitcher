@@ -1,18 +1,35 @@
 Version 1.2:
+
 17/05/2024-Slightly tweaked sample music - added the new HSR boss theme as the hostile mysterious encounter music.
+
 Version 1.1:
+
 19/04/2024-Added Github download and version checker support. Fixed some options not working.
+
 Version 1.0:
+
 15/04/2024-Official release. Fixed crash due to arcade/simulation having no music.
+
 Version 0.9:
+
 14/04/2024-Added (a lot of) combat music, trimmed existing music, rewrote code.
+
 Version 0.1b:
+
 27/03/2024-Fixed compatibility with Nexerelin's player music changen. Added a readme file & Changed the menu icon.
+
 Version 0.1a:
+
 21/03/2024-Fixed crash upon arriving at dead-drop target location due to having no music
+
 Version 0.1:
+
 21/03/2024-New Mod Created
-Version 0.1.1(Old mod changelog (before mod name change from HSR Music Pack):
+
+Version 0.1.1(before mod name change from HSR Music Pack):
+
 11/03/2024-Added Simulated Universe menu tracks for exploration, tweaked volumes
+
 Version 0.0.1:
+
 09/03/2024-Mod Created
