@@ -1,4 +1,4 @@
-Version 1.2:
+Version 1.2a:
 
 17/05/2024-Slightly tweaked sample music - added the new HSR boss theme as the hostile mysterious encounter music.
 
