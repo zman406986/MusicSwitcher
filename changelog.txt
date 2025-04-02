@@ -20,7 +20,7 @@ Version 0.9:
 
 Version 0.1b:
 
-27/03/2024-Fixed compatibility with Nexerelin's player music changen. Added a readme file & Changed the menu icon.
+27/03/2024-Fixed compatibility with Nexerelin's player music change. Added a readme file & Changed the menu icon.
 
 Version 0.1a:
 
@@ -37,3 +37,4 @@ Version 0.1.1(before mod name change from HSR Music Pack):
 Version 0.0.1:
 
 09/03/2024-Mod Created
+
