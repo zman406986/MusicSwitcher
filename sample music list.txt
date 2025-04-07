@@ -15,9 +15,11 @@ HegemonyCombat.ogg		Frozen March · Cocolia Boss Theme (Phase 1)+ A Trap With No
 LeagueCombat.ogg			Aventurine Suite
 RemnantCombat.ogg		Nevermore · Sam Boss Theme
 PirateCombat.ogg			Aberrant Receptacle · Starcrusher Swarm King · Boss Theme
-PathCombat.ogg			Mokshasatya Xianzhou Luofu Battle Theme
+PathCombat.ogg			Mokshasatya · Xianzhou Luofu Battle Theme
 LudditeCombat.ogg			Phantylia the Undying · Boss Theme (Finalized/Album Version)
 TachyonCombat.ogg		fReeStyLE · Herta Space Station Battle Theme
+ThreatCombat.ogg			To All Things Strifeful · Lance of Fury
+DwellerCombat.ogg			Flame Reaver of the Deepest Dark · Flame Reaver Boss Theme
 
 CustomCampaign1.ogg		Fate · Cocolia’s Flashback / Path Space
 CustomCampaign2.ogg		Herta Space Station · Battle Theme 2 (Prologue)
@@ -76,6 +78,9 @@ CustomRemnantEncounterHostile.ogg	Dense Floe · Corridor of Fading Echoes
 CustomRemnantEncounterFriendly.ogg	In Disbelief · Seclusion Zone
 CustomPlayerMarketFriendly1.ogg	Flow Experience · Herta's Office
 CustomPlayerMarketFriendly2.ogg	Space Walk · Herta Space Station
+CustomAbyssal.ogg			Wheel of Fate 
+CustomDwellerEncounter.ogg		To Gorgo Strife Ruins Castrum Kremnos
+CustomThreatEncounter.ogg		King Father of All · Incarnation of Strife
 
 
 //music below duplicates vanilla
