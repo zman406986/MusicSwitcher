@@ -1,3 +1,7 @@
+Version 1.4:
+
+07/04/2025-Added music and options for SUPER and VERY REDACTED stuff introduced in 0.98.
+
 Version 1.3:
 
 02/04/2025-Updated compatibility for Starsector 0.98.
@@ -28,13 +32,12 @@ Version 0.1a:
 
 Version 0.1:
 
-21/03/2024-New Mod Created
+21/03/2024-New Mod created with code to allow music options, name changed into Music Switcher
 
-Version 0.1.1(before mod name change from HSR Music Pack):
+Version 0.1.1
 
 11/03/2024-Added Simulated Universe menu tracks for exploration, tweaked volumes
 
 Version 0.0.1:
 
-09/03/2024-Mod Created
-
+09/03/2024-Mod Created (HSR Music Pack))
