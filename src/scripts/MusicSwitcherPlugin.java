@@ -12,387 +12,389 @@ import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Entities;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
+import com.fs.starfarer.api.impl.MusicPlayerPluginImpl;
 import com.fs.starfarer.api.util.Misc;
 import lunalib.lunaSettings.LunaSettings;
+import org.apache.log4j.Logger;
+import com.fs.starfarer.api.impl.campaign.tutorial.TutorialMissionIntel;
 
-import com.fs.starfarer.api.impl.MusicPlayerPluginImpl;
-
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 public class MusicSwitcherPlugin extends MusicPlayerPluginImpl
 {
-    protected String CheckFactionid = null;
-    protected String CheckMusicOption = null;
-    protected Random coin = new Random();
-    protected Boolean flip = coin.nextBoolean();
+    public static final String MUSIC_SWITCHER_IDENTIFIER = "Music_Switcher_Loaded";
+    private static final Logger LOG = Global.getLogger(MusicSwitcherPlugin.class);
+    public static final String MUSIC_SET_MEM_KEY = "$musicSetId";
+    public static final String MUSIC_SET_MEM_KEY_MISSION = "$musicSetIdForMission";
+    public static final String MUSIC_ENCOUNTER_MYSTERIOUS_AGGRO = "music_encounter_mysterious";
+    public static final String MUSIC_GALATIA_ACADEMY = "music_galatia_academy";
 
-    protected String CombineFactionid(String Factionid)
-    //Combines faction ids for grouped music options
+    private static final String PREFIX_CUSTOM = "Custom_";
+    private static final String PREFIX_ALL = "All_";
+
+    private static final Random RNG = Misc.random;
+
+    private enum MusicOption
     {
-        switch (Factionid)
+        CUSTOM("Custom"), BOTH("Both"), VANILLA("Vanilla"),
+        FACTION_SPECIFIC("Faction Specific"), GENERIC_COMBAT("Generic Combat Music"),
+        FACTION_GENERIC_SHUFFLE("Faction + Generic Shuffle"), ENTIRE_SAMPLE("Entire Sample Playlist");
+
+        private final String id;
+
+        MusicOption(String id) {this.id = id;}
+
+        static MusicOption of(String raw)
         {
-            case "knights_of_ludd":
-            case "luddic_church":
-                Factionid = "luddic_church";
-                break;
-            case "lions_guard":
-            case "sindrian_diktat":
-                Factionid = "sindrian_diktat";
-                break;
-            case "player":
-            case "hegemony":
-            case "luddic_path":
-            case "persean":
-            case "remnant":
-            case "omega":
-            case "pirates":
-            case "tritachyon":
-                break;
-            case "independent":
-            case "derelict":
-            case "scavengers":
-            case "neutral":
-            case "sleeper":
-            case "poor":
-                Factionid = "default";
-                break;
-            default:
-                //mod faction
-                Factionid = "other_faction";
-                break;
+            if (raw == null || raw.trim().isEmpty()) return VANILLA;
+            for (MusicOption o : values()) if (o.id.equals(raw)) return o;
+            return VANILLA;
         }
-        return Factionid;
     }
 
-    protected String SetMusic(String MusicName, String MusicOption)
-    //For non-faction non-combat music
+    private final Map<String, String> settingsCache = new HashMap<>();
+
+    private String getSetting(String key)
     {
-        if (MusicName != null && !MusicName.equals("music_none"))
-        {
-            switch (MusicOption)
-            {
-                case "Custom":
-                    return "Custom_" + MusicName;
-                case "Both":
-                    flip = coin.nextBoolean();
-                    System.out.println("flip and setting " + MusicName);
-                    return (flip) ? ("Custom_" + MusicName) : (MusicName);
-                case "Vanilla":
-                default:
-                    //MusicOption null
-                    System.out.println("default setting " + MusicName);
-                    return MusicName;
-            }
-        }
-        System.out.println("setting failed");
-        return "music_none";
+        String value = settingsCache.computeIfAbsent(
+                key, k -> Optional.ofNullable(LunaSettings.getString("Music_Switcher", k)).orElse("Vanilla"));
+        return value;
     }
 
-    protected String SetFactionMusic(String VanillaMusic, String FactionMusicType, String MusicOption)
+    private static final Map<String, String> FACTION_ALIAS;
+
+    static
     {
-        if (MusicOption != null)
-        {
-            System.out.println("option not null");
-            if (!Objects.equals(MusicOption, "other_faction"))
-            // not third party mod faction
-            {
-                System.out.println("not other_faction");
-                switch (MusicOption)
-                {
-                    case "Custom":
-                        FactionMusicType = "Custom_" + FactionMusicType;
-                        System.out.println("vanilla faction music custom");
-                        break;
-                    case "Both":
-                        flip = coin.nextBoolean();
-                        FactionMusicType = (flip) ? FactionMusicType : "Custom_" + FactionMusicType;
-                        System.out.println("vanilla faction flip");
-                        break;
-                    case "Vanilla":
-                    default:
-                        //MusicOption null, or somehow faction id didn't combine to it
-                        break;
-                }
-            }
-            else
-            // third party mod faction
-            {
-                switch (MusicOption)
-                {
-                    case "Custom":
-                        return "Custom_music_default_" + FactionMusicType;
-                    case "Both":
-                        flip = coin.nextBoolean();
-                        System.out.println("other_faction flip");
-                        if (VanillaMusic != null)
-                        {return (flip) ? "Custom_music_default_" + FactionMusicType : VanillaMusic;}
-                        else
-                        {return (flip) ? "Custom_music_default_" + FactionMusicType : "music_default_" + FactionMusicType;}
-                    case "Vanilla":
-                    default:
-                        //MusicOption for "other_faction" null, or somehow faction id didn't combine to it
-                        break;
-                }
-            }
-        }
-        return null;
+        Map<String, String> tmp = new HashMap<>();
+        tmp.put("knights_of_ludd", "luddic_church");
+        tmp.put("lions_guard", "sindrian_diktat");
+        tmp.put("remnant", "redacted");
+        tmp.put("omega", "redacted");
+        tmp.put("dweller", "redacted");
+        tmp.put("threat", "redacted");
+
+        tmp.put("player", "player");
+        tmp.put("hegemony", "hegemony");
+        tmp.put("luddic_path", "luddic_path");
+        tmp.put("persean", "persean");
+        tmp.put("pirates", "pirates");
+        tmp.put("tritachyon", "tritachyon");
+
+        tmp.put("independent", "default");
+        tmp.put("derelict", "default");
+        tmp.put("scavengers", "default");
+        tmp.put("neutral", "default");
+        tmp.put("sleeper", "default");
+        tmp.put("poor", "default");
+        FACTION_ALIAS = Collections.unmodifiableMap(tmp);
     }
 
+    private String canonicalFactionId(String id)
+    {
+        String canon = FACTION_ALIAS.getOrDefault(id, "other_faction");
+        return canon;
+    }
+
+    @Override
     public String getMusicSetIdForCombat(CombatEngineAPI engine)
     {
-        if (engine.isInCampaign())
+        String vanilla = super.getMusicSetIdForCombat(engine);
+        if (engine == null || engine.getContext() == null)
         {
-            String musicSetId = super.getMusicSetIdForCombat(engine);
-
-            FactionAPI faction = engine.getContext().getOtherFleet().getFaction();
-            String CheckFactionid = CombineFactionid(faction.getId());
-            String CheckMusicOption = LunaSettings.getString("Music_Switcher", CheckFactionid + "_combat_Music");
-            if (Objects.equals(CheckMusicOption, "Entire sample playlist"))
-            {return "All_music_combat";}
-            if (CheckMusicOption != null)
-            {
-                if (!Objects.equals(CheckFactionid, "other_faction"))
-                //not third party mod faction
-                {
-                    switch (CheckMusicOption)
-                    {
-                        case "Faction Specific":
-                            musicSetId = faction.getMusicMap().get("combat");
-                            break;
-                        case "Generic Combat Music":
-                            musicSetId = "Custom_music_combat";
-                            break;
-                        case "Faction + Generic Shuffle":
-                            flip = coin.nextBoolean();
-                            musicSetId = (flip) ? "Custom_music_combat" : faction.getMusicMap().get("combat");
-                            System.out.println("Combat flip");
-                            break;
-                        case "Entire Sample Playlist":
-                            musicSetId = "All_music_combat";
-                            break;
-                        case "Vanilla":
-                        default:
-                            //MusicOption null, or somehow faction id didn't combine to it
-                            break;
-                    }
-                }
-                else
-                // third party mod faction
-                {
-                    switch (CheckMusicOption)
-                    {
-                        case "Faction + Generic Shuffle":
-                            flip = coin.nextBoolean();
-                            if (faction.getMusicMap().get("combat") != null)
-                            {musicSetId = (flip) ? "Custom_music_combat" : faction.getMusicMap().get("combat");}
-                            else {musicSetId = "Custom_music_combat";}
-                            break;
-                        case "Generic Combat Music":
-                            musicSetId = "Custom_music_combat";
-                            break;
-                        case "Faction Specific":
-                            if (faction.getMusicMap().get("combat") != null)
-                            {musicSetId = faction.getMusicMap().get("combat");}
-                            else {musicSetId = "Custom_music_combat";}
-                            break;
-                        case "Entire Sample Playlist":
-                            musicSetId = "All_music_combat";
-                            break;
-                        case "Vanilla":
-                        default:
-                            //MusicOption for "other_faction" null, or somehow faction id didn't combine to it
-                            break;
-                    }
-                }
-            }
-            if (musicSetId != null)
-            {
-                System.out.println(musicSetId);
-                return musicSetId;
-            }
+            return vanilla;
         }
-        else if (!LunaSettings.getString("Music_Switcher", "default_combat_Music").equals("Vanilla"))
-        //not in campaign, is in simulation or arcade
-        {return "Custom_music_combat";}
-        System.out.println("combat super");
-        return super.getMusicSetIdForCombat(engine);
+
+        CampaignFleetAPI otherFleet = engine.getContext().getOtherFleet();
+        FactionAPI otherFaction = otherFleet != null ? otherFleet.getFaction() : null;
+
+        MusicOption option = (otherFaction != null)
+                ? MusicOption.of(getSetting(canonicalFactionId(otherFaction.getId()) + "_combat_Music"))
+                : MusicOption.of(getSetting("default_combat_Music"));
+
+        String result;
+        switch (option)
+        {
+            case GENERIC_COMBAT:
+                result = PREFIX_CUSTOM + "music_combat";
+                break;
+            case ENTIRE_SAMPLE:
+                result = PREFIX_ALL + "music_combat";
+                break;
+            case FACTION_SPECIFIC:
+                result = safeGetMusic(otherFaction, "Combat", vanilla);
+                break;
+            case FACTION_GENERIC_SHUFFLE:
+                if (RNG.nextBoolean() || otherFaction == null)
+                    result = PREFIX_CUSTOM + "music_combat";
+                else
+                    result = safeGetMusic(otherFaction, "Combat", PREFIX_CUSTOM + "music_combat");
+                break;
+            case VANILLA:
+            default:
+                result = vanilla;
+        }
+        return result;
     }
 
+    @Override
     public String getMusicSetIdForTitle()
     {
-        return SetMusic("music_title", LunaSettings.getString("Music_Switcher", "Menu_Music"));
+        String res = transform("music_title", MusicOption.of(getSetting("Menu_Music")), PREFIX_CUSTOM);
+        return res;
     }
 
-    protected String getPlanetSurveyMusicSetId(Object param)
-    {
-        return SetMusic("music_survey_and_scavenge", LunaSettings.getString("Music_Switcher", "Exploration_Music"));
-    }
-
+    @Override
     protected String getHyperspaceMusicSetId()
     {
-        return SetMusic("music_campaign_hyperspace", LunaSettings.getString("Music_Switcher", "Exploration_Music"));
+        String res = transform("music_campaign_hyperspace",
+                MusicOption.of(getSetting("Exploration_Music")), PREFIX_CUSTOM);
+        return res;
     }
 
-    protected String getStarSystemMusicSetId()
+    @Override
+    protected String getPlanetSurveyMusicSetId(Object param)
+    {
+        SectorEntityToken token = null;
+        if (param instanceof SectorEntityToken) {
+            token = (SectorEntityToken) param;
+        } else if (param instanceof MarketAPI) {
+            token = ((MarketAPI)param).getPlanetEntity();
+        }
+        if (token != null) {
+            String musicSetId = token.getMemoryWithoutUpdate().getString(MUSIC_SET_MEM_KEY_MISSION);
+            if (musicSetId != null) return musicSetId;
+            musicSetId = token.getMemoryWithoutUpdate().getString(MUSIC_SET_MEM_KEY);
+            if (musicSetId != null) return musicSetId;
+        }
 
+        String res = transform("music_survey_and_scavenge",
+                MusicOption.of(getSetting("Exploration_Music")), PREFIX_CUSTOM);
+        return res;
+    }
+
+    @Override
+    protected String getStarSystemMusicSetId()
     {
         CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
-        if (playerFleet.getContainingLocation() instanceof StarSystemAPI)
+        if (playerFleet != null && playerFleet.getContainingLocation() instanceof StarSystemAPI)
         {
-            StarSystemAPI system = (StarSystemAPI) playerFleet.getContainingLocation();
-            String musicSetId = system.getMemoryWithoutUpdate().getString(MUSIC_SET_MEM_KEY);
+            StarSystemAPI sys = (StarSystemAPI) playerFleet.getContainingLocation();
+
+            String musicSetId = sys.getMemoryWithoutUpdate().getString(MUSIC_SET_MEM_KEY_MISSION);
+            if (musicSetId != null) return musicSetId;
+            musicSetId = sys.getMemoryWithoutUpdate().getString(MUSIC_SET_MEM_KEY);
             if (musicSetId != null) return musicSetId;
 
-            if (system.hasTag(Tags.THEME_CORE) ||
-                    !Misc.getMarketsInLocation(system, Factions.PLAYER).isEmpty())
+            if (sys.hasTag(Tags.SYSTEM_ABYSSAL))
             {
-                return SetMusic("music_campaign", LunaSettings.getString("Music_Switcher", "Campaign_Music"));
+                String res = transform("music_campaign_abyssal",
+                        MusicOption.of(getSetting("Abyss_Music")), PREFIX_CUSTOM);
+                return res;
+            }
+
+            if (sys.hasTag(Tags.THEME_CORE) ||
+                    !Misc.getMarketsInLocation(sys, Factions.PLAYER).isEmpty())
+            {
+                String res = transform("music_campaign",
+                        MusicOption.of(getSetting("Campaign_Music")), PREFIX_CUSTOM);
+                return res;
             }
         }
-
-        return SetMusic("music_campaign_non_core", LunaSettings.getString("Music_Switcher", "Campaign_Music"));
+        String res = transform("music_campaign_non_core",
+                MusicOption.of(getSetting("Campaign_Music")), PREFIX_CUSTOM);
+        return res;
     }
 
+    @Override
     protected String getEncounterMusicSetId(Object param)
     {
-        if (param instanceof SectorEntityToken)
+        if (!(param instanceof SectorEntityToken)) return super.getEncounterMusicSetId(param);
+        SectorEntityToken token = (SectorEntityToken) param;
+
+        String musicSetId = token.getMemoryWithoutUpdate().getString(MUSIC_SET_MEM_KEY_MISSION);
+        if (musicSetId != null) return musicSetId;
+        musicSetId = token.getMemoryWithoutUpdate().getString(MUSIC_SET_MEM_KEY);
+        if (musicSetId != null) return musicSetId;
+
+        String type = token.getCustomEntityType();
+        if (Entities.ABYSSAL_LIGHT.equals(type) || Entities.WRECK.equals(type) || token.hasTag(Tags.GATE))
         {
-            SectorEntityToken token = (SectorEntityToken) param;
-
-            String musicSetId = token.getMemoryWithoutUpdate().getString(MUSIC_SET_MEM_KEY);
-            if (musicSetId != null) return musicSetId;
-
-            if (Entities.ABYSSAL_LIGHT.equals(token.getCustomEntityType()))
-            {
-                return SetMusic("music_encounter_neutral", LunaSettings.getString("Music_Switcher", "Exploration_Music"));
-            }
-            if (Entities.CORONAL_TAP.equals(token.getCustomEntityType()))
-            {
-                return SetMusic("music_encounter_mysterious", LunaSettings.getString("Music_Switcher", "Exploration_Music"));
-            }
-            if (Entities.WRECK.equals(token.getCustomEntityType()))
-            {
-                return SetMusic("music_encounter_neutral", LunaSettings.getString("Music_Switcher", "Exploration_Music"));
-            }
-            if (Entities.DERELICT_GATEHAULER.equals(token.getCustomEntityType()))
-            {
-                return SetMusic("music_encounter_mysterious_non_aggressive", LunaSettings.getString("Music_Switcher", "Exploration_Music"));
-            }
-
-            if (Entities.DEBRIS_FIELD_SHARED.equals(token.getCustomEntityType()))
-            {
-                return SetMusic("music_survey_and_scavenge", LunaSettings.getString("Music_Switcher", "Exploration_Music"));
-            }
-            if (token.hasTag(Tags.GATE))
-            {
-                return SetMusic("music_encounter_neutral", LunaSettings.getString("Music_Switcher", "Exploration_Music"));
-            }
-            if (token.hasTag(Tags.SALVAGEABLE))
-            {
-                if (token.getMemoryWithoutUpdate() != null && token.getMemoryWithoutUpdate().getBoolean("$hasDefenders"))
-                {
-                    if (token.getMemoryWithoutUpdate().getBoolean("$limboMiningStation"))
-                    {
-                        return SetMusic("music_encounter_mysterious", LunaSettings.getString("Music_Switcher", "Exploration_Music"));
-                    }
-                    if (token.getMemoryWithoutUpdate().getBoolean("$limboWormholeCache"))
-                    {
-                        return SetMusic("music_encounter_mysterious", LunaSettings.getString("Music_Switcher", "Exploration_Music"));
-                    }
-                    return SetMusic("music_encounter_neutral", LunaSettings.getString("Music_Switcher", "Exploration_Music"));
-                }
-                return SetMusic("music_survey_and_scavenge", LunaSettings.getString("Music_Switcher", "Exploration_Music"));
-            }
-            if (token.hasTag(Tags.SALVAGE_MUSIC))
-            {
-                return SetMusic("music_survey_and_scavenge", LunaSettings.getString("Music_Switcher", "Exploration_Music"));
-            }
-
-            if (token.getFaction() != null)
-            {
-                FactionAPI faction = (FactionAPI) token.getFaction();
-                String type = null;
-                //MemoryAPI mem = token.getMemoryWithoutUpdate();
-                boolean hostile = false;
-                boolean knowsWhoPlayerIs = false;
-                if (token instanceof CampaignFleetAPI)
-                {
-                    CampaignFleetAPI fleet = (CampaignFleetAPI) token;
-                    if (fleet.getAI() instanceof ModularFleetAIAPI)
-                    {
-                        hostile = ((ModularFleetAIAPI) fleet.getAI()).isHostileTo(Global.getSector().getPlayerFleet());
-                    }
-                    knowsWhoPlayerIs = fleet.knowsWhoPlayerIs();
-                }
-
-                if (faction.isAtWorst(Factions.PLAYER, RepLevel.FAVORABLE) && knowsWhoPlayerIs && !hostile)
-                {
-                    type = "encounter_friendly";
-                }
-                else if ((faction.isAtBest(Factions.PLAYER, RepLevel.SUSPICIOUS) && knowsWhoPlayerIs) || hostile)
-                {
-                    type = "encounter_hostile";
-                }
-                else
-                {
-                    type = "encounter_neutral";
-                }
-
-                CheckFactionid = CombineFactionid(faction.getId());
-                CheckMusicOption = LunaSettings.getString("Music_Switcher", CheckFactionid + "_Music");
-                musicSetId = faction.getMusicMap().get(type);
-                musicSetId = SetFactionMusic(musicSetId, type, CheckMusicOption);
-                if (musicSetId != null)
-                {return musicSetId;}
-            }
+            String res = transform("music_encounter_neutral",
+                    MusicOption.of(getSetting("Exploration_Music")), PREFIX_CUSTOM);
+            return res;
         }
-        System.out.println("encounter super");
-        return super.getEncounterMusicSetId(param);
+
+        if (Entities.CORONAL_TAP.equals(type) || Entities.DERELICT_GATEHAULER.equals(type))
+        {
+            String res = transform("music_encounter_mysterious",
+                    MusicOption.of(getSetting("Exploration_Music")), PREFIX_CUSTOM);
+            return res;
+        }
+
+        if (Entities.DEBRIS_FIELD_SHARED.equals(type) || token.hasTag(Tags.SALVAGE_MUSIC))
+        {
+            String res = transform("music_survey_and_scavenge",
+                    MusicOption.of(getSetting("Exploration_Music")), PREFIX_CUSTOM);
+            return res;
+        }
+
+        if (token.hasTag(Tags.SALVAGEABLE))
+        {
+            boolean hasDef = token.getMemoryWithoutUpdate().getBoolean("$hasDefenders");
+            boolean mysterious = token.getMemoryWithoutUpdate().getBoolean("$limboMiningStation") ||
+                    token.getMemoryWithoutUpdate().getBoolean("$limboWormholeCache");
+            String res;
+            if (hasDef)
+            {
+                res = transform(mysterious ? "music_encounter_mysterious" : "music_encounter_neutral",
+                        MusicOption.of(getSetting("Exploration_Music")), PREFIX_CUSTOM);
+            }
+            else
+            {
+                res = transform("music_survey_and_scavenge",
+                        MusicOption.of(getSetting("Exploration_Music")), PREFIX_CUSTOM);
+            }
+            return res;
+        }
+
+        FactionAPI faction = token.getFaction();
+        if (faction == null) return super.getEncounterMusicSetId(param);
+
+        String encounterType = determineEncounterType(token, faction);
+        String res = resolveMusicId(faction, encounterType, param);
+        return res;
     }
 
+    @Override
     protected String getMarketMusicSetId(Object param)
     {
-        if (param instanceof MarketAPI)
-        {
-            MarketAPI market = (MarketAPI) param;
-            String musicSetId = market.getMemoryWithoutUpdate().getString(MUSIC_SET_MEM_KEY);
-            if (musicSetId != null) return musicSetId;
+        if (!(param instanceof MarketAPI)) return super.getMarketMusicSetId(param);
+        MarketAPI market = (MarketAPI) param;
 
-            if (market.getPrimaryEntity() != null &&
-                    market.getPrimaryEntity().getMemoryWithoutUpdate().getBoolean("$abandonedStation"))
-            {
-                return getPlanetSurveyMusicSetId(param);
+        String musicSetId = market.getMemoryWithoutUpdate().getString(MUSIC_SET_MEM_KEY_MISSION);
+        if (musicSetId != null) return musicSetId;
+        musicSetId = market.getMemoryWithoutUpdate().getString(MUSIC_SET_MEM_KEY);
+        if (musicSetId != null) return musicSetId;
+
+        if (market.getPrimaryEntity() != null &&
+                "station_galatia_academy".equals(market.getPrimaryEntity().getId())) {
+            if (TutorialMissionIntel.isTutorialInProgress()) {
+                return MUSIC_ENCOUNTER_MYSTERIOUS_AGGRO;
             }
+            MusicOption option = MusicOption.of(getSetting("Galatia_Academy_Music"));
+            return transform(MUSIC_GALATIA_ACADEMY, option, PREFIX_CUSTOM);
+        }
 
-            FactionAPI faction = market.getFaction();
-            if (faction != null)
-            {
+        if (market.getPrimaryEntity() != null &&
+                market.getPrimaryEntity().getMemoryWithoutUpdate().getBoolean("$abandonedStation"))
+        {
+            String res = getPlanetSurveyMusicSetId(param);
+            return res;
+        }
 
-                String type = null;
-                if (faction.isAtWorst(Factions.PLAYER, RepLevel.FAVORABLE))
-                {
-                    type = "market_friendly";
+        FactionAPI faction = market.getFaction();
+        if (faction == null) return super.getMarketMusicSetId(param);
+
+        String marketType = determineMarketType(faction);
+        String res = resolveMusicId(faction, marketType, param);
+        return res;
+    }
+
+    private String resolveMusicId(FactionAPI faction, String type, Object param)
+    {
+        String fid = canonicalFactionId(faction.getId());
+        MusicOption opt = MusicOption.of(getSetting(fid + "_Music"));
+        String transformed = transform(type, opt, PREFIX_CUSTOM);
+        String result = safeGetMusic(faction, transformed, null);
+
+        if (result == null) {
+            if (type.startsWith("encounter_")) {
+                if (faction.isAtWorst(Factions.PLAYER, RepLevel.FAVORABLE)) {
+                    result = "music_default_encounter_friendly";
+                } else if (faction.isAtBest(Factions.PLAYER, RepLevel.SUSPICIOUS)) {
+                    result = "music_default_encounter_hostile";
+                } else {
+                    result = "music_default_encounter_neutral";
                 }
-                else if (faction.isAtBest(Factions.PLAYER, RepLevel.SUSPICIOUS))
-                {
-                    type = "market_hostile";
+            } else if (type.startsWith("market_")) {
+                if (faction.isAtWorst(Factions.PLAYER, RepLevel.FAVORABLE)) {
+                    result = "music_default_market_friendly";
+                } else if (faction.isAtBest(Factions.PLAYER, RepLevel.SUSPICIOUS)) {
+                    result = "music_default_market_hostile";
+                } else {
+                    result = "music_default_market_neutral";
                 }
-                else
-                {
-                    type = "market_neutral";
-                }
-
-                CheckFactionid = CombineFactionid(faction.getId());
-                CheckMusicOption = LunaSettings.getString("Music_Switcher", CheckFactionid + "_Music");
-                musicSetId = faction.getMusicMap().get(type);
-                musicSetId = SetFactionMusic(musicSetId, type, CheckMusicOption);
-                if (musicSetId != null)
-                {return musicSetId;}
-
             }
         }
-        System.out.println("market super");
-        return super.getMarketMusicSetId(param);
+
+        return result != null ? result : super.getEncounterMusicSetId(param);
+    }
+
+    private String transform(String baseId, MusicOption opt, String prefix)
+    {
+        switch (opt)
+        {
+            case CUSTOM:
+                return prefix + baseId;
+            case BOTH:
+                return RNG.nextBoolean() ? prefix + baseId : baseId;
+            default:
+                return baseId;
+        }
+    }
+
+    private String determineEncounterType(SectorEntityToken token, FactionAPI faction)
+    {
+        CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
+        boolean hostile = false;
+        boolean knows = false;
+
+        if (token instanceof CampaignFleetAPI)
+        {
+            CampaignFleetAPI f = (CampaignFleetAPI) token;
+            if (f.getAI() instanceof ModularFleetAIAPI)
+            {
+                ModularFleetAIAPI ai = (ModularFleetAIAPI) f.getAI();
+                if (ai != null && playerFleet != null) {
+                    hostile = ai.isHostileTo(playerFleet);
+                }
+            }
+            knows = f.knowsWhoPlayerIs();
+        }
+
+        if (faction.isAtWorst(Factions.PLAYER, RepLevel.FAVORABLE) && knows && !hostile)
+            return "encounter_friendly";
+        else if ((faction.isAtBest(Factions.PLAYER, RepLevel.SUSPICIOUS) && knows) || hostile)
+            return "encounter_hostile";
+        else
+            return "encounter_neutral";
+    }
+
+    private String determineMarketType(FactionAPI faction)
+    {
+        if (faction.isAtWorst(Factions.PLAYER, RepLevel.FAVORABLE))
+            return "market_friendly";
+        else if (faction.isAtBest(Factions.PLAYER, RepLevel.SUSPICIOUS))
+            return "market_hostile";
+        else
+            return "market_neutral";
+    }
+
+    private String safeGetMusic(FactionAPI faction, String type, String fallback)
+    {
+        if (faction == null)
+        {
+            return fallback;
+        }
+        Map<String, String> map = faction.getMusicMap();
+        if (map == null) return fallback;
+
+        String id = map.get(type);
+
+        if (id == null && type.startsWith(PREFIX_CUSTOM))
+        {
+            id = map.get(type.substring(PREFIX_CUSTOM.length()));
+        }
+        return id != null ? id : fallback;
     }
 }
