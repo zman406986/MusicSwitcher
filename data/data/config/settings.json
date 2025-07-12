@@ -1,0 +1,13 @@
+{	
+	"plugins": 
+	{	
+  		"musicPlugin":"scripts.MusicSwitcherPlugin",
+	},
+
+	"graphics":
+	{
+		"Music_Switcher":{
+			"preload":"graphics/icons/Music_Switcher_icon.png",
+		},	
+	}
+}
