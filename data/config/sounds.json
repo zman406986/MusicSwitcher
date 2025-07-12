@@ -40,7 +40,16 @@
 			"randomStart":false,
 		},
 	],
-
+	"Custom_music_campaign_abyssal":[
+		{
+			"source":"sounds/Campaign",
+			"volume":1.00,
+			"files":[
+				"CustomAbyssal.ogg"
+			],
+			"randomStart":false,
+		},
+	],
 #Combat#
 	"Custom_music_combat":[
 		{
@@ -50,7 +59,7 @@
 				"CustomCombat1.ogg",
 				"CustomCombat2.ogg"
 			],
-			"randomStart":false,
+			"randomStart":true,
 		},
 
 	],
@@ -134,6 +143,26 @@
 			"randomStart":false,
 		},
 	],
+	"Custom_music_threat_combat":[
+		{
+			"source":"sounds/Combat",
+			"volume":0.45,
+			"files":[
+				"ThreatCombat.ogg",
+			],
+			"randomStart":false,
+		},
+	],
+	"Custom_music_dweller_combat":[
+		{
+			"source":"sounds/Combat",
+			"volume":0.45,
+			"files":[
+				"DwellerCombat.ogg",
+			],
+			"randomStart":false,
+		},
+	],
     "All_music_combat":[
     {
       "source":"sounds/Combat",
@@ -142,7 +171,7 @@
         "CustomCombat1.ogg",
 		"CustomCombat2.ogg"
       ],
-      "randomStart":false,
+      "randomStart":true,
     },
     {
       "source":"sounds/Combat",
@@ -208,6 +237,22 @@
       ],
       "randomStart":false,
     },
+    {
+      "source":"sounds/Combat",
+      "volume":0.45,
+      "files":[
+        "ThreatCombat.ogg",
+      ],
+      "randomStart":false,
+    },
+    {
+      "source":"sounds/Combat",
+      "volume":0.45,
+      "files":[
+        "DwellerCombat.ogg",
+      ],
+      "randomStart":false,
+    },
   ],
 
   #Title Menu#
@@ -218,6 +263,11 @@
 #Survey and Scavenge#
 	"Custom_music_survey_and_scavenge":[
 		{"file":"CustomSurvey.ogg","source":"sounds/Miscallenous","volume":1.50},
+	],
+
+#Galatia Academy#
+	"Custom_music_galatia_academy":[
+		{"file":"CustomGalatiaAcademy.ogg","source":"sounds/Miscallenous","volume":1.00} 
 	],
 
 #Exploration Encounters#
@@ -424,7 +474,7 @@
 	],
 
 #Luddic Path#
-	"Custom_music_path_market_neutral":[
+	"Custom_music_luddic_path_market_neutral":[
       {
         "source":"sounds/Factions/Path",
         "volume":0.8,
@@ -434,7 +484,7 @@
         "randomStart":true,
       },
 	],
-	"Custom_music_path_market_hostile":[
+	"Custom_music_luddic_path_market_hostile":[
       {
         "source":"sounds/Factions/Path",
         "volume":0.8,
@@ -444,7 +494,7 @@
         "randomStart":true,
       },
 	],
-	"Custom_music_path_market_friendly":[
+	"Custom_music_luddic_path_market_friendly":[
       {
         "source":"sounds/Factions/Path",
         "volume":0.8,
@@ -454,7 +504,7 @@
         "randomStart":true,
       },
 	],
-	"Custom_music_path_encounter_neutral":[
+	"Custom_music_luddic_path_encounter_neutral":[
       {
         "source":"sounds/Factions/Path",
         "volume":0.8,
@@ -464,7 +514,7 @@
         "randomStart":true,
       },
 	],
-	"Custom_music_path_encounter_hostile":[
+	"Custom_music_luddic_path_encounter_hostile":[
       {
         "source":"sounds/Factions/Path",
         "volume":0.8,
@@ -474,7 +524,7 @@
         "randomStart":true,
       },
 	],
-	"Custom_music_path_encounter_friendly":[
+	"Custom_music_luddic_path_encounter_friendly":[
       {
         "source":"sounds/Factions/Path",
         "volume":0.8,
@@ -506,6 +556,16 @@
       "randomStart":true,
     },
   ],
+	"Custom_music_diktat_market_neutral":[
+		{
+			"source":"sounds/Factions/Diktat",
+			"volume":0.85,
+			"files":[
+				"CustomDiktatMarketNeutral.ogg",
+			],
+			"randomStart":true,
+		},
+	],
   "Custom_music_diktat_encounter_neutral":[
     {
       "source":"sounds/Factions/Diktat",
@@ -728,7 +788,7 @@
 			},
 	],
 
-#Remnant(encounter only, market redirects to default)#
+#Remnant(encounter only, market redirects to default)
 	"Custom_music_remnant_encounter_neutral":[
 			{
 				"source":"sounds/Factions/Remnant",
@@ -781,6 +841,129 @@
 		},
 	],
 	"Custom_music_remnant_market_friendly":[
+		{
+			"source":"sounds/Factions/Default",
+			"volume":1.00,
+			"files":[
+				"CustomDefaultMarketFriendly.ogg",
+			],
+			"randomStart":true,
+		},
+	],
+#Threat(encounter only, market redirects to default)
+	"Custom_music_threat_encounter_neutral":[
+			{
+				"source":"sounds/Factions/Threat",
+				"volume":0.6,
+				"files":[
+					"CustomThreatEncounter.ogg",
+				],
+				"randomStart":true,
+			},
+	],
+	"Custom_music_threat_encounter_hostile":[
+			{
+				"source":"sounds/Factions/Threat",
+				"volume":0.6,
+				"files":[
+					"CustomThreatEncounter.ogg",
+				],
+				"randomStart":true,
+			},
+	],
+	"Custom_music_threat_encounter_friendly":[
+			{
+				"source":"sounds/Factions/Threat",
+				"volume":0.6,
+				"files":[
+					"CustomThreatEncounter.ogg",
+				],
+				"randomStart":true,
+			},
+	],
+	"Custom_music_threat_market_neutral":[
+		{
+			"source":"sounds/Factions/Default",
+			"volume":0.80,
+			"files":[
+				"CustomDefaultMarketNeutral.ogg",
+			],
+			"randomStart":true,
+		},
+	],
+	"Custom_music_threat_market_hostile":[
+		{
+			"source":"sounds/Factions/Default",
+			"volume":1.20,
+			"files":[
+				"CustomDefaultMarketHostile.ogg",
+			],
+			"randomStart":true,
+		},
+	],
+	"Custom_music_threat_market_friendly":[
+		{
+			"source":"sounds/Factions/Default",
+			"volume":1.00,
+			"files":[
+				"CustomDefaultMarketFriendly.ogg",
+			],
+			"randomStart":true,
+		},
+	],
+#Dweller(encounter only, market redirects to default)
+	"Custom_music_dweller_encounter_neutral":[
+			{
+				"source":"sounds/Factions/Dweller",
+				"volume":0.8,
+				"files":[
+					"CustomDwellerEncounter.ogg",
+				],
+				"randomStart":true,
+			},
+	],
+	"Custom_music_dweller_encounter_hostile":[
+			{
+				"source":"sounds/Factions/Dweller",
+				"volume":0.8,
+				"files":[
+					"CustomDwellerEncounter.ogg",
+				],
+				"randomStart":true,
+			},
+	],
+	"Custom_music_dweller_encounter_friendly":[
+			{
+				"source":"sounds/Factions/Dweller",
+				"volume":0.8,
+				"files":[
+					"CustomDwellerEncounter.ogg",
+				],
+				"randomStart":true,
+			},
+	],
+	"Custom_music_dweller_market_neutral":[
+		{
+			"source":"sounds/Factions/Default",
+			"volume":0.80,
+			"files":[
+				"CustomDefaultMarketNeutral.ogg",
+			],
+			"randomStart":true,
+		},
+	],
+	"Custom_music_dweller_market_hostile":[
+		{
+
+			"source":"sounds/Factions/Default",
+			"volume":1.20,
+			"files":[
+				"CustomDefaultMarketHostile.ogg",
+			],
+			"randomStart":true,
+		},
+	],
+	"Custom_music_dweller_market_friendly":[
 		{
 			"source":"sounds/Factions/Default",
 			"volume":1.00,

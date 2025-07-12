@@ -2,11 +2,11 @@
     "music": 
 	{
         	"Combat": "Custom_music_persean_combat",
-	"Custom_market_neutral":"Custom_music_persean_market_neutral",
-	"Custom_market_hostile":"Custom_music_persean_market_hostile",
-	"Custom_market_friendly":"Custom_music_persean_market_friendly",
-	"Custom_encounter_neutral":"Custom_music_persean_encounter_neutral",
-	"Custom_encounter_hostile":"Custom_music_persean_encounter_hostile",
-	"Custom_encounter_friendly":"Custom_music_persean_encounter_friendly",
+	"Custom_market_neutral":"Custom_music_persean_league_market_neutral",
+	"Custom_market_hostile":"Custom_music_persean_league_market_hostile",
+	"Custom_market_friendly":"Custom_music_persean_league_market_friendly",
+	"Custom_encounter_neutral":"Custom_music_persean_league_encounter_neutral",
+	"Custom_encounter_hostile":"Custom_music_persean_league_encounter_hostile",
+	"Custom_encounter_friendly":"Custom_music_persean_league_encounter_friendly",
     	}
 }

@@ -7,6 +7,8 @@ If you are a modder, you can also add combat music for your mod's faction and le
 Menu_Music,Menu Music,Radio,Custom,"Custom, Vanilla, Both",What music to play when you start up the game,,,Campaign Music
 Campaign_Music,Campaign Music,Radio,Custom,"Custom, Vanilla, Both",What music to play when you are moving around in space and hyperspace,,,Campaign Music
 Exploration_Music,Exploration Music,Radio,Custom,"Custom, Vanilla, Both","What music to play when you are surveying, scavaging, and encountering interesting or dangerous things while you explore",,,Campaign Music
+Abyss_Music,Abyss Music,Radio,Custom,"Custom, Vanilla, Both",What music to play when you are inside an abyssal system,,,Campaign Music
+Galatia_Academy_Music,Galatia Academy Music,Radio,Custom,"Custom, Vanilla, Both",What music to play when you dock at the Galatia Academy,,,Campaign Music
 ,,,,,,,,
 hegemony_combat_Music,Hegemony Combat Music,Radio,Faction Specific,"Generic Combat Music, Faction Specific, Faction + Generic Shuffle, Entire Sample Playlist, Vanilla",What music to play during combat with Hegemony fleets,,,Combat Music
 tritachyon_combat_Music,Tachyon Combat Music,Radio,Faction Specific,"Generic Combat Music, Faction Specific, Faction + Generic Shuffle, Entire Sample Playlist, Vanilla",What music to play during combat with Tritachyon fleets,,,Combat Music
@@ -15,7 +17,7 @@ luddic_path_combat_Music,Luddic Path Combat Music,Radio,Faction Specific,"Generi
 sindrian_diktat_combat_Music,Sindrian Diktat Combat Music,Radio,Faction Specific,"Generic Combat Music, Faction Specific, Faction + Generic Shuffle, Entire Sample Playlist, Vanilla",What music to play during combat with Sindrian Diktat Fleets,,,Combat Music
 persean_combat_Music,Persean League Combat Music,Radio,Faction Specific,"Generic Combat Music, Faction Specific, Faction + Generic Shuffle, Entire Sample Playlist, Vanilla",What music to play during combat with Persean League Fleets,,,Combat Music
 pirates_combat_Music,Pirate Combat Music,Radio,Faction Specific,"Generic Combat Music, Faction Specific, Faction + Generic Shuffle, Entire Sample Playlist, Vanilla",What music to play during combat with Pirate Fleets,,,Combat Music
-remnant_combat_Music,REDACTED Combat Music,Radio,Faction Specific,"Generic Combat Music, Faction Specific, Faction + Generic Shuffle, Entire Sample Playlist, Vanilla",What music to play during combat with REDACTED Fleets,,,Combat Music
+redacted_combat_Music,REDACTED Combat Music,Radio,Faction Specific,"Generic Combat Music, Faction Specific, Faction + Generic Shuffle, Entire Sample Playlist, Vanilla","What music to play during combat with REDACTED Fleets, including the VERY SUPER REDACTED ones",,,Combat Music
 default_combat_Music,Default Combat Music,Radio,Generic Combat Music,"Generic Combat Music, Faction Specific, Faction + Generic Shuffle, Entire Sample Playlist, Vanilla","What music to play when you fight a faction not listed above
 (Third party mod factions are not affected)",,,Combat Music
 other_faction_combat_Music,Third Party Mod Factions Combat Music,Radio,Faction Specific,"Generic Combat Music, Faction Specific, Faction + Generic Shuffle, Entire Sample Playlist, Vanilla","What music to play when you fight a non-vanilla mod faction. 
@@ -39,7 +41,7 @@ sindrian_diktat_Music,Sindrian Diktat Music,Radio,Custom,"Custom, Vanilla, Both"
 ",,,Faction Encounter and Market Music
 persean_Music,Persean League Music,Radio,Custom,"Custom, Vanilla, Both",What music to play when you encounter League fleets or markets,,,Faction Encounter and Market Music
 pirates_Music,Pirate Music,Radio,Custom,"Custom, Vanilla, Both",What music to play when you encounter Pirate fleets or markets,,,Faction Encounter and Market Music
-remnant_Music,REDACTED Music,Radio,Custom,"Custom, Vanilla, Both",What music to play when you encounter REDACTED fleets or markets,,,Faction Encounter and Market Music
+redacted_Music,REDACTED Music,Radio,Custom,"Custom, Vanilla, Both","What music to play when you encounter REDACTED fleets or markets, including the VERY SUPER REDACTED ones",,,Faction Encounter and Market Music
 default_Music,Independent Music,Radio,Custom,"Custom, Vanilla, Both","What music to play when you fight a faction not listed above
 (Third party mod factions are not affected)",,,Faction Encounter and Market Music
 other_faction_Music,Third Party Mod Factions Music,Radio,Custom,"Custom, Vanilla, Both","What music to play when you encounter fleets or markets from a third party mod (Vanilla here = use their own music, if any",,,Faction Encounter and Market Music
