@@ -3,7 +3,7 @@
 	"name":"Music Switcher", 
 	"author":"Emanon6",
     	"utility":"true",
-	"version":"1.5.0",
+	"version":"1.6.0",
 	"description":"Allows you to choose what music to play upon specific encounters, using Lunalib's menu settings. HSR music samples included by default. Okay to add/remove without starting a new game.",
   	"jars":["jars/MusicSwitcher.jar"],
    	"gameVersion": "0.98a-RC7",

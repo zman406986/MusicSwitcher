@@ -1,6 +1,6 @@
 Version 1.6:
 
-12/06/2025-Fixed missing memory key (silence/crash for mod faction music) and added option for Galatia Academy.
+12/07/2025-Fixed missing memory key (silence/crash for mod faction music) and added option for Galatia Academy.
 
 Version 1.5:
 
