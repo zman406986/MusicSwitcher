@@ -20,6 +20,7 @@ LudditeCombat.ogg			Phantylia the Undying · Boss Theme (Finalized/Album Version
 TachyonCombat.ogg		fReeStyLE · Herta Space Station Battle Theme
 ThreatCombat.ogg			To All Things Strifeful · Lance of Fury
 DwellerCombat.ogg			Flame Reaver of the Deepest Dark · Flame Reaver Boss Theme
+CustomGalatiaAcademy.ogg		As Written By Whom (Variation) · As I’ve Written: Exomyth
 
 CustomCampaign1.ogg		Fate · Cocolia’s Flashback / Path Space
 CustomCampaign2.ogg		Herta Space Station · Battle Theme 2 (Prologue)
