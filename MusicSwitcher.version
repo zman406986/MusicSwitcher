@@ -4,13 +4,13 @@
     {
         "major":1,
         "minor":7,
-        "patch":0,# Can be a number, character or string (1, 2, a, b, "-RC2", etc)
+        "patch":a,# Can be a number, character or string (1, 2, a, b, "-RC2", etc)
     },
     "modName":"Music Switcher",
 	"modThreadId":29440,
 	
 	#Link towards a direct download, fetched from the online version file
-	"directDownloadURL":"https://github.com/zman406986/MusicSwitcher/releases/download/Default/MusicSwitcher.zip",
+	"directDownloadURL":"https://github.com/zman406986/MusicSwitcher/releases/latest/download/MusicSwitcher.zip",
 	
 	#Link towards a directly accessible text file, which can be used to display a changelog ingame, is fetched from the online version file.
 	#The menu will highlight any line that beginns with "Version"

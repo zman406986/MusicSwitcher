@@ -1,3 +1,7 @@
+Version 1.7a:
+
+27/07/2025-github link fix.
+
 Version 1.7:
 
 27/07/2025-Silence/crash should be all gone now: fixed more issues introduced in 1.5 and learnt not to trust GPT to freely overhaul my code.
