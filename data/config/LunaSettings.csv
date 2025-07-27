@@ -4,6 +4,7 @@ Explanation,Mod explanation,Text,"This mod allows you to mix-and-match custom mu
 You can replace existing tracks, or add your more to a shuffle. Refer to the readme file in the mod folder for a detailed guide.
 
 If you are a modder, you can also add combat music for your mod's faction and let Music Switcher play it, see the readme file for details.",,,,,Campaign Music
+Log_Enabled,Dev Mod,Radio,No,"Yes, No",Choose Yes to make Music Switcher log everything it does for debugging.,,,Campaign Music
 Menu_Music,Menu Music,Radio,Custom,"Custom, Vanilla, Both",What music to play when you start up the game,,,Campaign Music
 Campaign_Music,Campaign Music,Radio,Custom,"Custom, Vanilla, Both",What music to play when you are moving around in space and hyperspace,,,Campaign Music
 Exploration_Music,Exploration Music,Radio,Custom,"Custom, Vanilla, Both","What music to play when you are surveying, scavaging, and encountering interesting or dangerous things while you explore",,,Campaign Music
