@@ -1,3 +1,7 @@
+Version 1.7:
+
+27/07/2025-Silence/crash should be all gone now: fixed more issues introduced in 1.5 and learnt not to trust GPT to freely overhaul my code.
+
 Version 1.6:
 
 12/07/2025-Fixed missing memory key (silence/crash for mod faction music) and added option for Galatia Academy.
@@ -42,7 +46,7 @@ Version 0.1:
 
 21/03/2024-New Mod created with code to allow music options, name changed into Music Switcher
 
-Version 0.1.1
+Version 0.1.1:
 
 11/03/2024-Added Simulated Universe menu tracks for exploration, tweaked volumes
 
