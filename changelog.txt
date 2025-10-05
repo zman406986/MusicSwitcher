@@ -1,3 +1,7 @@
+Version 1.8:
+
+06/10/2025-New fix for both AL error 40964 and silence after prolonged use (likely actually caused by rapid calls, patched via caching).
+
 Version 1.7a:
 
 27/07/2025-github link fix.
